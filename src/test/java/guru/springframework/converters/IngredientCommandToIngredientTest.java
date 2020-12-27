@@ -4,12 +4,13 @@ import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
 
 public class IngredientCommandToIngredientTest {
 
@@ -21,19 +22,19 @@ public class IngredientCommandToIngredientTest {
 
     IngredientCommandToIngredient converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
     @Test
     public void testNullObject() throws Exception {
-        assertNull(converter.convert(null));
+        Assertions.assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new IngredientCommand()));
+        Assertions.assertNotNull(converter.convert(new IngredientCommand()));
     }
 
     @Test
@@ -51,12 +52,12 @@ public class IngredientCommandToIngredientTest {
         Ingredient ingredient = converter.convert(command);
 
         //then
-        assertNotNull(ingredient);
-        assertNotNull(ingredient.getUom());
-        assertEquals(ID_VALUE, ingredient.getId());
-        assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
-        assertEquals(UOM_ID, ingredient.getUom().getId());
+        Assertions.assertNotNull(ingredient);
+        Assertions.assertNotNull(ingredient.getUom());
+        Assertions.assertEquals(ID_VALUE, ingredient.getId());
+        Assertions.assertEquals(AMOUNT, ingredient.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredient.getDescription());
+        Assertions.assertEquals(UOM_ID, ingredient.getUom().getId());
     }
 
     @Test
@@ -73,11 +74,11 @@ public class IngredientCommandToIngredientTest {
         Ingredient ingredient = converter.convert(command);
 
         //then
-        assertNotNull(ingredient);
-        assertNull(ingredient.getUom());
-        assertEquals(ID_VALUE, ingredient.getId());
-        assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        Assertions.assertNotNull(ingredient);
+        Assertions.assertNull(ingredient.getUom());
+        Assertions.assertEquals(ID_VALUE, ingredient.getId());
+        Assertions.assertEquals(AMOUNT, ingredient.getAmount());
+        Assertions.assertEquals(DESCRIPTION, ingredient.getDescription());
     }
 
 }

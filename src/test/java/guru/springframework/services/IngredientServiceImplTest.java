@@ -9,14 +9,15 @@ import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -39,7 +40,7 @@ public class IngredientServiceImplTest {
         this.ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
@@ -77,8 +78,8 @@ public class IngredientServiceImplTest {
         IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId(1L, 3L);
 
         //when
-        assertEquals(Long.valueOf(3L), ingredientCommand.getId());
-        assertEquals(Long.valueOf(1L), ingredientCommand.getRecipeId());
+        Assertions.assertEquals(Long.valueOf(3L), ingredientCommand.getId());
+        Assertions.assertEquals(Long.valueOf(1L), ingredientCommand.getRecipeId());
         verify(recipeRepository, times(1)).findById(anyLong());
     }
 
@@ -103,7 +104,7 @@ public class IngredientServiceImplTest {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
         //then
-        assertEquals(Long.valueOf(3L), savedCommand.getId());
+        Assertions.assertEquals(Long.valueOf(3L), savedCommand.getId());
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
