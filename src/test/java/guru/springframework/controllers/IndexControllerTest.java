@@ -48,7 +48,6 @@ public class IndexControllerTest {
     }
 
     @Test
-    @Disabled
     public void getIndexPage() throws Exception {
 
         //given
