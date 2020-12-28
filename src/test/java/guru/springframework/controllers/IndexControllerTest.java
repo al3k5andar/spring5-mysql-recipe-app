@@ -47,33 +47,33 @@ public class IndexControllerTest {
                 .andExpect(view().name("index"));
     }
 
-    @Test
-    @Disabled
-    public void getIndexPage() throws Exception {
-
-        //given
-        Set<Recipe> recipes = new HashSet<>();
-        recipes.add(new Recipe());
-
-        Recipe recipe = new Recipe();
-        recipe.setId(1L);
-
-        recipes.add(recipe);
-
-        when(recipeService.getRecipes()).thenReturn(recipes);
-
-        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
-
-        //when
-        String viewName = controller.getIndexPage(model);
-
-
-        //then
-        Assertions.assertEquals("index", viewName);
-        verify(recipeService, times(1)).getRecipes();
-        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
-        Set<Recipe> setInController = argumentCaptor.getValue();
-        Assertions.assertEquals(2, setInController.size());
-    }
+//    @Test
+//    @Disabled
+//    public void getIndexPage() throws Exception {
+//
+//        //given
+//        Set<Recipe> recipes = new HashSet<>();
+//        recipes.add(new Recipe());
+//
+//        Recipe recipe = new Recipe();
+//        recipe.setId(1L);
+//
+//        recipes.add(recipe);
+//
+//        when(recipeService.getRecipes()).thenReturn(recipes);
+//
+//        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+//
+//        //when
+//        String viewName = controller.getIndexPage(model);
+//
+//
+//        //then
+//        Assertions.assertEquals("index", viewName);
+//        verify(recipeService, times(1)).getRecipes();
+//        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+//        Set<Recipe> setInController = argumentCaptor.getValue();
+//        Assertions.assertEquals(2, setInController.size());
+//    }
 
 }
